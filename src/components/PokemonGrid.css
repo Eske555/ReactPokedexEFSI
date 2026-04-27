@@ -12,21 +12,39 @@
   text-align: center;
   font-size: 14px;
   margin-bottom: 16px;
-  color: #ffffff;
+  color: #000;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 400;
   padding: 12px;
-  background: #3b4cca;
+  background: #ffcc00;
   border: 4px solid #000;
   box-shadow: 4px 4px 0 #000;
-  text-shadow: 2px 2px 0 #000;
+  animation: titleSlide 0.5s steps(4);
+}
+
+@keyframes titleSlide {
+  from {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .pokemon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
+  padding: 16px;
+  background: #8b0000;
+  border: 8px solid #000;
+  box-shadow: 
+    inset 0 0 0 4px #ff1111,
+    inset 0 0 0 8px #000,
+    8px 8px 0 #000;
 }
 
 .grid-card {
@@ -35,7 +53,7 @@
   border: 4px solid #000;
   cursor: pointer;
   transition: none;
-  animation: scaleIn 0.3s steps(4) backwards;
+  animation: cardFlip 0.5s steps(6) backwards;
   position: relative;
   box-shadow: 4px 4px 0 #000;
 }
@@ -53,19 +71,26 @@
 .grid-card:nth-child(11) { animation-delay: 0.55s; }
 .grid-card:nth-child(12) { animation-delay: 0.6s; }
 
-@keyframes scaleIn {
+@keyframes cardFlip {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: rotateY(90deg) scale(0.5);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: rotateY(0deg) scale(1);
   }
 }
 
 .grid-card:hover {
   background: #ffcc00;
+  animation: cardShake 0.3s steps(4);
+}
+
+@keyframes cardShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }
 
 .grid-card:active {
@@ -79,8 +104,17 @@
   right: 8px;
   font-size: 8px;
   font-weight: 400;
-  color: #666;
+  color: #fff;
+  background: #000;
+  padding: 4px 8px;
+  border: 2px solid #ffcc00;
   letter-spacing: 1px;
+  animation: idBlink 1s steps(2) infinite;
+}
+
+@keyframes idBlink {
+  0%, 70% { opacity: 1; }
+  71%, 100% { opacity: 0.7; }
 }
 
 .grid-card-image-container {
@@ -91,7 +125,21 @@
   align-items: center;
   justify-content: center;
   border: 4px solid #000;
-  background: #f0f0f0;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      #f0f0f0,
+      #f0f0f0 8px,
+      #e0e0e0 8px,
+      #e0e0e0 16px
+    );
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
+  animation: frameBounce 2s ease-in-out infinite;
+}
+
+@keyframes frameBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .grid-card-image {
@@ -102,6 +150,23 @@
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.2));
+  animation: spriteWiggle 1.5s ease-in-out infinite;
+}
+
+@keyframes spriteWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.grid-card:hover .grid-card-image {
+  animation: spriteJump 0.5s steps(4);
+}
+
+@keyframes spriteJump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-16px) scale(1.1); }
 }
 
 .grid-card-name {
@@ -112,6 +177,18 @@
   color: #000;
   margin: 0 0 8px 0;
   letter-spacing: 1px;
+  animation: nameSlide 0.5s steps(4) backwards;
+}
+
+@keyframes nameSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .grid-card-types {
@@ -128,6 +205,19 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   border: 2px solid #000;
+  animation: typePop 0.3s steps(4) backwards;
+}
+
+.grid-type:nth-child(1) { animation-delay: 0.1s; }
+.grid-type:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes typePop {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .grid-type.normal { background: var(--type-normal); color: #000; }
@@ -151,7 +241,7 @@
 
 @media (max-width: 1024px) {
   .pokemon-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
 }
 
@@ -162,8 +252,9 @@
   }
   
   .pokemon-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 12px;
+    padding: 12px;
   }
   
   .grid-card {

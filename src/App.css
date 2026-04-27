@@ -3,7 +3,28 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #ffcc00 #1a1a1a;
+}
+
+.app::-webkit-scrollbar {
+  width: 16px;
+}
+
+.app::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border: 4px solid #000;
+}
+
+.app::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border: 4px solid #000;
+}
+
+.app::-webkit-scrollbar-thumb:hover {
+  background: #ffde00;
 }
 
 .main-content {
@@ -16,27 +37,6 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #ffcc00 #1a1a1a;
-}
-
-.main-content::-webkit-scrollbar {
-  width: 16px;
-}
-
-.main-content::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border: 4px solid #000;
-}
-
-.main-content::-webkit-scrollbar-thumb {
-  background: #ffcc00;
-  border: 4px solid #000;
-}
-
-.main-content::-webkit-scrollbar-thumb:hover {
-  background: #ffde00;
 }
 
 .footer {

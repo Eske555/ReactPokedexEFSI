@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import pikachuGif from '../pikachuruninng.gif'
 import './SplashScreen.css'
 
 function SplashScreen({ onComplete }) {
@@ -17,7 +18,7 @@ function SplashScreen({ onComplete }) {
     <div className={`splash-screen ${!isAnimating ? 'fade-out' : ''}`}>
       <div className="splash-content">
         <img 
-          src="/pikachuruninng.gif" 
+          src={pikachuGif} 
           alt="Pikachu Running"
           className="pikachu-running"
         />
