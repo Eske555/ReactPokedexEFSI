@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './PokemonCard.css'
 
-function PokemonCard({ pokemon, onBattleClick }) {
+function PokemonCard({ pokemon, onBattleClick, onDetailClick }) {
   const [imageLoaded, setImageLoaded] = useState(false)
   const primaryType = pokemon.types[0].type.name
 
@@ -35,11 +35,18 @@ function PokemonCard({ pokemon, onBattleClick }) {
         <span className="pokemon-id">#{String(pokemon.id).padStart(3, '0')}</span>
       </div>
 
-      {onBattleClick && (
-        <button className="battle-button" onClick={onBattleClick}>
-          MODO BATALLA
-        </button>
-      )}
+      <div className="card-actions">
+        {onBattleClick && (
+          <button className="battle-button" onClick={onBattleClick}>
+            MODO BATALLA
+          </button>
+        )}
+        {onDetailClick && (
+          <button className="detail-button" onClick={() => onDetailClick(pokemon)}>
+            VER INFO
+          </button>
+        )}
+      </div>
 
       <div className="pokemon-image-container">
         {!imageLoaded && <div className="image-skeleton"></div>}

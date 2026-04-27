@@ -3,11 +3,15 @@ import Header from './components/Header'
 import SearchBar from './components/SearchBar'
 import PokemonCard from './components/PokemonCard'
 import PokemonGrid from './components/PokemonGrid'
+import PokemonGridView from './components/PokemonGridView'
 import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMessage from './components/ErrorMessage'
 import SplashScreen from './components/SplashScreen'
 import BattleMode from './components/BattleMode'
 import BattleSelector from './components/BattleSelector'
+import PokemonDetail from './components/PokemonDetail'
+import TeamView from './components/TeamView'
+import PokemonHistory from './components/PokemonHistory'
 import './App.css'
 
 function App() {
@@ -21,6 +25,23 @@ function App() {
   const [battleOpponent, setBattleOpponent] = useState(null)
   const [showBattleSelector, setShowBattleSelector] = useState(false)
   const [suggestions, setSuggestions] = useState([])
+  const [showDetail, setShowDetail] = useState(false)
+  const [detailPokemon, setDetailPokemon] = useState(null)
+  const [viewMode, setViewMode] = useState('grid') // 'grid' o 'search'
+  const [showTeam, setShowTeam] = useState(false)
+  const [showHistory, setShowHistory] = useState(false)
+
+  const trackPokemonView = (pokemonData) => {
+    const history = JSON.parse(localStorage.getItem('pokemonHistory') || '[]')
+    const newEntry = {
+      name: pokemonData.name,
+      id: pokemonData.id,
+      sprite: pokemonData.sprites.front_default,
+      timestamp: new Date().toISOString()
+    }
+    history.unshift(newEntry)
+    localStorage.setItem('pokemonHistory', JSON.stringify(history))
+  }
 
   const handleLogoClick = () => {
     setShowSplash(true)
@@ -30,6 +51,7 @@ function App() {
     setBattleMode(false)
     setBattleOpponent(null)
     setSuggestions([])
+    setViewMode('grid')
   }
 
   const handleBattleClick = () => {
@@ -69,6 +91,7 @@ function App() {
 
     clearUI()
     setLoading(true)
+    setViewMode('search')
 
     try {
       const normalizedQuery = query.toLowerCase().trim()
@@ -135,13 +158,36 @@ function App() {
     await searchPokemon(pokemonName)
   }
 
+  const handleDetailClick = (pokemonData) => {
+    trackPokemonView(pokemonData)
+    setDetailPokemon(pokemonData)
+    setShowDetail(true)
+  }
+
+  const handleGridPokemonClick = (pokemonData) => {
+    trackPokemonView(pokemonData)
+    setDetailPokemon(pokemonData)
+    setShowDetail(true)
+  }
+
+  const handleBattleFromDetail = () => {
+    if (detailPokemon) {
+      setPokemon(detailPokemon)
+      setShowBattleSelector(true)
+    }
+  }
+
   if (showSplash) {
     return <SplashScreen onComplete={() => setShowSplash(false)} />
   }
 
   return (
     <div className="app">
-      <Header onLogoClick={handleLogoClick} />
+      <Header 
+        onLogoClick={handleLogoClick}
+        onTeamClick={() => setShowTeam(true)}
+        onHistoryClick={() => setShowHistory(true)}
+      />
       
       <main className="main-content">
         <SearchBar onSearch={searchPokemon} loading={loading} />
@@ -163,11 +209,19 @@ function App() {
           </div>
         )}
         
-        {!loading && !error && pokemon && searchType === 'pokemon' && (
-          <PokemonCard pokemon={pokemon} onBattleClick={handleBattleClick} />
+        {viewMode === 'grid' && !loading && !error && (
+          <PokemonGridView onPokemonClick={handleGridPokemonClick} />
         )}
         
-        {!loading && !error && pokemonList.length > 0 && searchType === 'type' && (
+        {viewMode === 'search' && !loading && !error && pokemon && searchType === 'pokemon' && (
+          <PokemonCard 
+            pokemon={pokemon} 
+            onBattleClick={handleBattleClick}
+            onDetailClick={handleDetailClick}
+          />
+        )}
+        
+        {viewMode === 'search' && !loading && !error && pokemonList.length > 0 && searchType === 'type' && (
           <PokemonGrid pokemons={pokemonList} onPokemonClick={handlePokemonClick} />
         )}
       </main>
@@ -188,6 +242,31 @@ function App() {
             setBattleMode(false)
             setBattleOpponent(null)
           }} 
+        />
+      )}
+
+      {showDetail && detailPokemon && (
+        <PokemonDetail
+          pokemon={detailPokemon}
+          onClose={() => {
+            setShowDetail(false)
+            setDetailPokemon(null)
+          }}
+          onBattleClick={handleBattleFromDetail}
+        />
+      )}
+
+      {showTeam && (
+        <TeamView
+          onPokemonClick={handleGridPokemonClick}
+          onClose={() => setShowTeam(false)}
+        />
+      )}
+
+      {showHistory && (
+        <PokemonHistory
+          onPokemonClick={handleGridPokemonClick}
+          onClose={() => setShowHistory(false)}
         />
       )}
 

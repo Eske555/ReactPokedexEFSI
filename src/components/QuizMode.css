@@ -1,0 +1,403 @@
+.quiz-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s steps(4);
+}
+
+.quiz-container {
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  background: linear-gradient(to bottom, #e8d8f0 0%, #d8c8e0 100%);
+  border: 8px solid #000;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 8px 8px 0 #000;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  padding: 24px;
+}
+
+.quiz-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #ff0000;
+  border: 4px solid #000;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+  z-index: 10;
+}
+
+.quiz-close:hover {
+  background: #cc0000;
+}
+
+.quiz-close:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.quiz-loading {
+  text-align: center;
+  font-size: 16px;
+  padding: 60px;
+  animation: blink 1s steps(2) infinite;
+}
+
+/* Menu */
+.quiz-menu {
+  text-align: center;
+}
+
+.quiz-title {
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.quiz-stats {
+  background: #f8f8f8;
+  border: 4px solid #000;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.quiz-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #000;
+}
+
+.stat-label {
+  color: #666;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #ffcc00;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.quiz-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-mode-btn {
+  background: #f8f8f8;
+  border: 4px solid #000;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+  text-align: left;
+  transition: none;
+}
+
+.quiz-mode-btn:hover {
+  background: #fff;
+  transform: translateY(-4px);
+  box-shadow: 6px 8px 0 #000;
+}
+
+.quiz-mode-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.mode-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.mode-name {
+  font-size: 12px;
+  color: #000;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.mode-desc {
+  font-size: 8px;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+/* Quiz Game */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 4px solid #000;
+}
+
+.quiz-score {
+  display: flex;
+  gap: 24px;
+  font-size: 10px;
+  color: #000;
+}
+
+.quiz-back {
+  background: #9b7bb5;
+  border: 3px solid #000;
+  padding: 8px 16px;
+  font-size: 9px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.quiz-back:hover {
+  background: #b89bd5;
+}
+
+.quiz-back:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.quiz-question {
+  background: #f8f8f8;
+  border: 4px solid #000;
+  padding: 32px;
+  box-shadow: 4px 4px 0 #000;
+  min-height: 400px;
+}
+
+.question-title {
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+/* Silhouette */
+.silhouette-container {
+  text-align: center;
+}
+
+.pokemon-silhouette {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 32px;
+  filter: brightness(0);
+  image-rendering: pixelated;
+  animation: silhouettePulse 2s ease-in-out infinite;
+}
+
+.pokemon-silhouette.revealed {
+  filter: brightness(1);
+  animation: revealPokemon 0.5s steps(4);
+}
+
+@keyframes silhouettePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes revealPokemon {
+  0% { filter: brightness(0); }
+  100% { filter: brightness(1); }
+}
+
+/* Description */
+.description-container {
+  text-align: center;
+}
+
+.pokemon-description {
+  background: #fff;
+  border: 3px solid #000;
+  padding: 20px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #000;
+  margin-bottom: 32px;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Stats */
+.stats-container {
+  text-align: center;
+}
+
+.stats-display {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.stat-item {
+  background: #fff;
+  border: 3px solid #000;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+}
+
+.stat-name {
+  color: #666;
+}
+
+.stat-value {
+  color: #000;
+  font-weight: 700;
+}
+
+/* Options */
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.quiz-option {
+  background: #9b7bb5;
+  border: 4px solid #000;
+  padding: 16px;
+  font-size: 10px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 4px 4px 0 #000;
+  letter-spacing: 1px;
+}
+
+.quiz-option:hover:not(:disabled) {
+  background: #b89bd5;
+  transform: translateY(-2px);
+  box-shadow: 5px 6px 0 #000;
+}
+
+.quiz-option:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.quiz-option.correct {
+  background: #00ff00;
+  color: #000;
+}
+
+.quiz-option.incorrect {
+  background: #ff0000;
+  color: #fff;
+}
+
+.quiz-option:disabled {
+  cursor: not-allowed;
+}
+
+/* Result */
+.quiz-result {
+  text-align: center;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 3px solid #000;
+  animation: resultAppear 0.3s steps(4);
+}
+
+@keyframes resultAppear {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.result-correct .result-icon {
+  font-size: 48px;
+  color: #00ff00;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.result-incorrect .result-icon {
+  font-size: 48px;
+  color: #ff0000;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.result-text {
+  font-size: 12px;
+  margin: 16px 0;
+  letter-spacing: 1px;
+}
+
+.next-button {
+  background: #ffcc00;
+  border: 4px solid #000;
+  padding: 12px 24px;
+  font-size: 10px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 4px 4px 0 #000;
+  letter-spacing: 1px;
+  margin-top: 16px;
+}
+
+.next-button:hover {
+  background: #ffde00;
+  transform: translateY(-2px);
+  box-shadow: 5px 6px 0 #000;
+}
+
+.next-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 16px;
+  }
+
+  .quiz-title {
+    font-size: 18px;
+  }
+
+  .quiz-modes {
+    gap: 12px;
+  }
+
+  .mode-name {
+    font-size: 10px;
+  }
+
+  .mode-desc {
+    font-size: 7px;
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-display {
+    grid-template-columns: 1fr;
+  }
+
+  .pokemon-silhouette {
+    width: 150px;
+    height: 150px;
+  }
+}
