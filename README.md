@@ -6,7 +6,7 @@ Aplicación completa de Pokédex desarrollada en **React** con diseño retro ins
 
 ## ✨ CARACTERÍSTICAS PRINCIPALES
 
-### 🎨 DISEÑO Y ESTILO
+### 🎨 DISEÑO Y ESTILO  
 - **Estética 8-bit completa** con fuente Press Start 2P
 - **Renderizado pixelado** de sprites e imágenes
 - **Animaciones retro** con `steps()` para efecto Game Boy
