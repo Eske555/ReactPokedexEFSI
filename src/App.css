@@ -1,0 +1,138 @@
+.app {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffcc00 #1a1a1a;
+}
+
+.main-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border: 4px solid #000;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border: 4px solid #000;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: #ffde00;
+}
+
+.footer {
+  padding: 16px;
+  text-align: center;
+  background: #3366ff;
+  border-top: 4px solid #000;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #000;
+  box-shadow: 0 -4px 0 #2244cc;
+}
+
+.footer p {
+  margin: 0 0 8px 0;
+}
+
+.footer-credits {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.footer-credits a {
+  color: #ffcc00;
+  text-decoration: none;
+  margin: 0 8px;
+  transition: none;
+}
+
+.footer-credits a:hover {
+  color: #ffde00;
+  text-decoration: underline;
+}
+
+.suggestions-container {
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  padding: 16px;
+  background: #f0f0f0;
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.suggestion-button {
+  background: #ffcc00;
+  border: 4px solid #000;
+  padding: 12px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 4px 4px 0 #000;
+  transition: none;
+}
+
+.suggestion-button:hover {
+  background: #ffde00;
+}
+
+.suggestion-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .footer {
+    padding: 12px;
+    font-size: 8px;
+  }
+  
+  .footer-credits {
+    font-size: 7px;
+  }
+  
+  .footer-credits a {
+    margin: 0 4px;
+  }
+  
+  .suggestions-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .suggestion-button {
+    font-size: 8px;
+    padding: 10px;
+  }
+}

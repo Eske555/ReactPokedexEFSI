@@ -1,0 +1,166 @@
+.battle-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s steps(4);
+}
+
+.battle-selector-container {
+  width: 90%;
+  max-width: 500px;
+  background: #ffffff;
+  border: 4px solid #000;
+  padding: 24px;
+  position: relative;
+  box-shadow: 8px 8px 0 #000;
+}
+
+.selector-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #ff0000;
+  border: 4px solid #000;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 12px;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.selector-close:hover {
+  background: #cc0000;
+}
+
+.selector-close:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.selector-title {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #000;
+  margin: 0 0 24px 0;
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 4px solid #000;
+}
+
+.selector-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.selector-random {
+  width: 100%;
+  background: #ffcc00;
+  border: 4px solid #000;
+  padding: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 4px 4px 0 #000;
+  animation: buttonBlink 1s steps(2) infinite;
+}
+
+@keyframes buttonBlink {
+  0%, 70% { background: #ffcc00; }
+  71%, 100% { background: #ffde00; }
+}
+
+.selector-random:hover {
+  background: #ffde00;
+}
+
+.selector-random:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.selector-divider {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.selector-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selector-input {
+  width: 100%;
+  background: #ffffff;
+  border: 4px solid #000;
+  padding: 12px;
+  font-size: 10px;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  color: #000;
+  outline: none;
+}
+
+.selector-input::placeholder {
+  color: #666;
+}
+
+.selector-submit {
+  width: 100%;
+  background: #00ff00;
+  border: 4px solid #000;
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.selector-submit:hover {
+  background: #00cc00;
+}
+
+.selector-submit:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .selector-title {
+    font-size: 14px;
+  }
+  
+  .selector-random,
+  .selector-submit {
+    font-size: 10px;
+    padding: 12px;
+  }
+  
+  .selector-input {
+    font-size: 9px;
+  }
+}
